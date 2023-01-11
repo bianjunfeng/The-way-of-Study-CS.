@@ -1,0 +1,58 @@
+# 704、二分查找
+
+做法：
+
+定义查找的范围，初始查找范围是整个数组，每次取查找范围的中点mid，比较nums[mid]和target的大小，如果相等则mid即为寻找的下标，如果不相等，则根据nums[mid]和target的大小关系将查找范围缩小一半。
+
+解法：因为是正序查找，首先是查找整个数组，而查找范围是会随着查找次数以及target值而发生变化的，所以将范围的左右设为两个变量，分别为left和right，然后保证left小于right。
+
+出现错误：
+
+```c++
+Line 5: Char 26: error: no member named 'length' in 'std::vector<int, std::allocator<int>>'
+        int right = nums.length-1;
+                    ~~~~ ^
+1 error generated.
+```
+
+错误原因：由于之前学JAVA，最近才开始学习C++来刷题，将nums.length改为nums.size，执行通过。
+
+# 27、移除元素
+
+做法：
+
+```c++
+class Solution {
+
+public:
+
+  int removeElement(vector<int>& nums, int val) {
+
+    int length = nums.size();
+      int k = 0;
+
+    for(int i = 0;i<length;i++){
+
+      if(nums[i]==val){
+
+        for(int j = i;j<length-1;j++){  
+
+         nums[j]==nums[j+1];
+
+       }  
+          length--;
+          i--;
+
+     }
+
+   }
+    return length;
+
+  }
+
+};
+```
+
+暴力解法：用两个for循环，第一个循环遇到与val相同的值就进入第二个for循环中，然后将这个元素后边的元素全部往前推一位，实现数组的更新。
+
+这组代码存在问题，for循环嵌套不可以使用相同的变量i。
